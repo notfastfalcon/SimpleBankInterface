@@ -1,9 +1,9 @@
 # SimpleBankInterface
-This is a minimalistic bank user interface programmed in C# using Windows Forms. This bank allows customers to create checking accounts. The checking account balance is always tracked in Canadian currency. Deposits and withdraws can be made in Canadian dollars, US dollars, Mexican Pesos or Euros. The applicable exchange rate is applied when depositing or withdrawing a foreign currency.
+This is a minimalistic bank user interface programmed in C# using Windows Forms. This bank allows customers to create checking accounts. The checking account balance is always tracked in Canadian currency. Deposits and withdraws can be made in Canadian dollars, US dollars, Mexican Pesos or Euros. The applicable exchange rate is applied when depositing or withdrawing a foreign currency.  
 Exchange Rates:
-$1.00 CAD = $0.50 USD
-$1.00 CAD = $10.00 MXN
-$1.00 CAD = €0.25 EURO
+* $1.00 CAD = $0.50 USD
+* $1.00 CAD = $10.00 MXN
+* $1.00 CAD = €0.25 EURO
 
 ### Functionality: ###
 * Current account balance is displayed
