@@ -51,12 +51,12 @@ namespace SimpleBankInterface
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            ProcessTransaction(true);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            ProcessTransaction(false);
         }
 
         private void ProcessTransaction(bool isDeposit)
@@ -79,11 +79,19 @@ namespace SimpleBankInterface
                     balance += convertedAmount;
                 }
                 else
-                {
-                    balance -= convertedAmount;
+                {   
+                    if (convertedAmount <= balance)
+                    {
+                        balance -= convertedAmount;
+                    }
+                    else
+                    {
+                       MessageBox.Show("Please enter a valid amount.");
+                    }
                 }
 
                 label4.Text = $"${balance} CAD";
+                textBox1.Text = "";
             }
             else
             {
