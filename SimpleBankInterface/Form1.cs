@@ -86,7 +86,7 @@ namespace SimpleBankInterface
                     }
                     else
                     {
-                       MessageBox.Show("Please enter a valid amount.");
+                       MessageBox.Show("Not enough balance.");
                     }
                 }
 
