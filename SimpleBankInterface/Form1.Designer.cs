@@ -88,7 +88,7 @@
             // 
             balanceLabel.AutoSize = true;
             balanceLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            balanceLabel.Location = new Point(230, 71);
+            balanceLabel.Location = new Point(190, 71);
             balanceLabel.Name = "balanceLabel";
             balanceLabel.Size = new Size(82, 28);
             balanceLabel.TabIndex = 5;
