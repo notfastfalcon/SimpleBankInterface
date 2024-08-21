@@ -122,6 +122,7 @@ namespace SimpleBankInterface
         private decimal convertToCAD(decimal amount, string currency)
         {   
             // Convert selected currency to CAD 
+            // No try catch block as exception would be caught by outer function
             
             // Default case
             decimal conversionRate = 1.0m;
