@@ -77,20 +77,20 @@
             // accountBalance
             // 
             accountBalance.AutoSize = true;
-            accountBalance.Font = new Font("Segoe UI", 12F);
+            accountBalance.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             accountBalance.Location = new Point(385, 71);
             accountBalance.Name = "accountBalance";
-            accountBalance.Size = new Size(79, 28);
+            accountBalance.Size = new Size(85, 28);
             accountBalance.TabIndex = 4;
             accountBalance.Text = "balance";
             // 
             // balanceLabel
             // 
             balanceLabel.AutoSize = true;
-            balanceLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            balanceLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             balanceLabel.Location = new Point(230, 71);
             balanceLabel.Name = "balanceLabel";
-            balanceLabel.Size = new Size(91, 28);
+            balanceLabel.Size = new Size(82, 28);
             balanceLabel.TabIndex = 5;
             balanceLabel.Text = "Balance:";
             // 
@@ -137,22 +137,24 @@
             // 
             // withdrawButton
             // 
+            withdrawButton.BackColor = Color.LightCoral;
             withdrawButton.Location = new Point(190, 118);
             withdrawButton.Name = "withdrawButton";
             withdrawButton.Size = new Size(140, 42);
             withdrawButton.TabIndex = 7;
             withdrawButton.Text = "WITHDRAW";
-            withdrawButton.UseVisualStyleBackColor = true;
+            withdrawButton.UseVisualStyleBackColor = false;
             withdrawButton.Click += withdrawButton_Click;
             // 
             // depositButton
             // 
+            depositButton.BackColor = Color.LightGreen;
             depositButton.Location = new Point(385, 118);
             depositButton.Name = "depositButton";
             depositButton.Size = new Size(140, 42);
             depositButton.TabIndex = 6;
             depositButton.Text = "DEPOSIT";
-            depositButton.UseVisualStyleBackColor = true;
+            depositButton.UseVisualStyleBackColor = false;
             depositButton.Click += depositButton_Click;
             // 
             // currency
