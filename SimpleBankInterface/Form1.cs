@@ -3,104 +3,127 @@ namespace SimpleBankInterface
     public partial class Form1 : Form
     {
         private decimal balance;
+        private decimal maxBalance;
         public Form1()
         {
             InitializeComponent();
 
-            // Initial balance and account number (hardcoded)
+            // Initial balance, maxLimit (for real life scenario) and account number (hardcoded)
             balance = 1000.00m;
-            comboBox1.Items.AddRange(new string[] { "1234" });
-            comboBox1.SelectedIndex = 0;
+            maxBalance = 300000000000.00m; // Limit set to 300 Billion
+            accountActive.Items.AddRange(new string[] { "1234" });
+            accountActive.SelectedIndex = 0;
 
-            label4.Text = $"${balance} CAD";
+            accountBalance.Text = $"${balance.ToString("N2")} CAD";
 
             // Setup currency dropdown
-            comboBox2.Items.AddRange(new string[] { "CAD", "USD", "MXN", "EURO" });
-            comboBox2.SelectedIndex = 0; // Default to CAD
+            currency.Items.AddRange(new string[] { "CAD", "USD", "MXN", "EURO" });
+            currency.SelectedIndex = 0; // Default to CAD
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void depositButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ProcessTransaction(true);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            ProcessTransaction(false);
-        }
-
-        private void ProcessTransaction(bool isDeposit)
-        {
-            decimal amount;
-            if (decimal.TryParse(textBox1.Text, out amount) && amount > 0)
+            try
             {
-                // Ensure SelectedItem is not null before using it
-                var selectedCurrency = comboBox2.SelectedItem as string;
-                if (selectedCurrency == null)
-                {
-                    MessageBox.Show("Please select a currency.");
-                    return;
-                }
+                processTransaction(true);
+            }
+            catch
+            {
+                raiseToast("Something went wrong. Your balance stayed unaffected");
+            }
+        }
 
-                decimal convertedAmount = ConvertToCAD(amount, selectedCurrency);
+        private void withdrawButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                processTransaction(false);
+            }
+            catch
+            {
+                raiseToast("Something went wrong. Your balance stayed unaffected");
+            }
+        }
 
-                if (isDeposit)
+        private void processTransaction(bool isDeposit)
+        {   
+            // Track existing balance to revert transaction if error occurs
+            decimal existingBalance = balance;
+
+            try
+            {
+                decimal amount;
+
+                // Parse into decimal type to ensure numeric input
+                if (decimal.TryParse(amountTextBox.Text, out amount) && amount > 0)
                 {
-                    balance += convertedAmount;
-                }
-                else
-                {   
-                    if (convertedAmount <= balance)
+                    // Ensure SelectedItem is not null before using it
+                    var selectedCurrency = currency.SelectedItem as string;
+                    if (selectedCurrency == null)
                     {
-                        balance -= convertedAmount;
+                        raiseToast("Please select a currency.");
+                        amountTextBox.Text = "";
+                        currency.SelectedIndex = 0;
+                        return;
+                    }
+
+                    // Round to 2 decimal places and convert amount to CAD
+                    amount = Math.Round(amount, 2);
+                    decimal convertedAmount = convertToCAD(amount, selectedCurrency);
+
+                    // Add to account if Deposit, else subtract from account if Withdraw
+                    if (isDeposit)
+                    {
+                        if (balance + convertedAmount <= maxBalance)
+                        {
+                            balance += convertedAmount;
+                        }
+                        else
+                        {
+                            raiseToast("Amount exceeds max balance limit.");
+                        }
+
                     }
                     else
                     {
-                       MessageBox.Show("Not enough balance.");
+                        if (convertedAmount <= balance)
+                        {
+                            balance -= convertedAmount;
+                        }
+                        else
+                        {
+                            raiseToast("Not enough balance.");
+                        }
                     }
+                    
+                    // Update Frontend
+                    accountBalance.Text = $"${balance.ToString("N2")} CAD";
+                    amountTextBox.Text = "";
+                    currency.SelectedIndex = 0;
                 }
-
-                label4.Text = $"${balance} CAD";
-                textBox1.Text = "";
+                else
+                {   
+                    // Raise Error
+                    raiseToast("Please enter a valid amount.");
+                    amountTextBox.Text = "";
+                    currency.SelectedIndex = 0;
+                }
             }
-            else
-            {
-                MessageBox.Show("Please enter a valid amount.");
+            catch
+            {   
+                // Raise Error
+                raiseToast($"An error occurred during transaction. Balance was reverted.");
+                accountBalance.Text = $"${existingBalance.ToString("N2")} CAD";
+                amountTextBox.Text = "";
+                currency.SelectedIndex = 0;
             }
         }
 
-        private decimal ConvertToCAD(decimal amount, string currency)
-        {
+        private decimal convertToCAD(decimal amount, string currency)
+        {   
+            // Convert selected currency to CAD 
+            
+            // Default case
             decimal conversionRate = 1.0m;
 
             switch (currency)
@@ -117,6 +140,20 @@ namespace SimpleBankInterface
             }
 
             return amount * conversionRate;
+        }
+
+        private void raiseToast(string message, int durationMilliseconds = 3000)
+        {   
+            // Raise error on the frontend side for 3 seconds
+            errorLabel.Text = message;
+            errorLabel.Visible = true;
+            var timer = new System.Windows.Forms.Timer { Interval = durationMilliseconds };
+            timer.Tick += (sender, e) =>
+            {
+                errorLabel.Visible = false;
+                timer.Stop();
+            };
+            timer.Start();
         }
     }
 }

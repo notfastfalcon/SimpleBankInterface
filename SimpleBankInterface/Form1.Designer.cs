@@ -28,80 +28,79 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            comboBox1 = new ComboBox();
-            label2 = new Label();
-            label4 = new Label();
-            label3 = new Label();
+            welcomeLabel = new Label();
+            accountActive = new ComboBox();
+            accountLabel = new Label();
+            accountBalance = new Label();
+            balanceLabel = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
-            button2 = new Button();
-            button1 = new Button();
-            comboBox2 = new ComboBox();
-            textBox1 = new TextBox();
-            label5 = new Label();
+            errorLabel = new Label();
+            withdrawButton = new Button();
+            depositButton = new Button();
+            currency = new ComboBox();
+            amountTextBox = new TextBox();
+            amountLabel = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
-            // label1
+            // welcomeLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(21, 24);
-            label1.Name = "label1";
-            label1.Size = new Size(205, 28);
-            label1.TabIndex = 0;
-            label1.Text = "Welcome, John Smith!";
-            label1.Click += label1_Click;
+            welcomeLabel.AutoSize = true;
+            welcomeLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            welcomeLabel.Location = new Point(21, 24);
+            welcomeLabel.Name = "welcomeLabel";
+            welcomeLabel.Size = new Size(205, 28);
+            welcomeLabel.TabIndex = 0;
+            welcomeLabel.Text = "Welcome, John Smith!";
             // 
-            // comboBox1
+            // accountActive
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(527, 37);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 1;
+            accountActive.DropDownStyle = ComboBoxStyle.DropDownList;
+            accountActive.Font = new Font("Segoe UI", 12F);
+            accountActive.Location = new Point(514, 24);
+            accountActive.Name = "accountActive";
+            accountActive.Size = new Size(151, 36);
+            accountActive.TabIndex = 1;
             // 
-            // label2
+            // accountLabel
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(428, 37);
-            label2.Name = "label2";
-            label2.Size = new Size(93, 28);
-            label2.TabIndex = 2;
-            label2.Text = "Account: ";
-            label2.Click += label2_Click;
+            accountLabel.AutoSize = true;
+            accountLabel.Font = new Font("Segoe UI", 12F);
+            accountLabel.Location = new Point(428, 37);
+            accountLabel.Name = "accountLabel";
+            accountLabel.Size = new Size(93, 28);
+            accountLabel.TabIndex = 2;
+            accountLabel.Text = "Account: ";
             // 
-            // label4
+            // accountBalance
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F);
-            label4.Location = new Point(385, 71);
-            label4.Name = "label4";
-            label4.Size = new Size(65, 28);
-            label4.TabIndex = 4;
-            label4.Text = "label4";
-            label4.Click += label4_Click;
+            accountBalance.AutoSize = true;
+            accountBalance.Font = new Font("Segoe UI", 12F);
+            accountBalance.Location = new Point(385, 71);
+            accountBalance.Name = "accountBalance";
+            accountBalance.Size = new Size(79, 28);
+            accountBalance.TabIndex = 4;
+            accountBalance.Text = "balance";
             // 
-            // label3
+            // balanceLabel
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(230, 71);
-            label3.Name = "label3";
-            label3.Size = new Size(100, 28);
-            label3.TabIndex = 5;
-            label3.Text = "BALANCE:";
-            label3.Click += label3_Click;
+            balanceLabel.AutoSize = true;
+            balanceLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            balanceLabel.Location = new Point(230, 71);
+            balanceLabel.Name = "balanceLabel";
+            balanceLabel.Size = new Size(91, 28);
+            balanceLabel.TabIndex = 5;
+            balanceLabel.Text = "Balance:";
             // 
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(label4);
-            panel1.Controls.Add(label3);
+            panel1.Controls.Add(welcomeLabel);
+            panel1.Controls.Add(accountBalance);
+            panel1.Controls.Add(accountActive);
+            panel1.Controls.Add(balanceLabel);
             panel1.Font = new Font("Segoe UI", 12F);
             panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
@@ -111,62 +110,76 @@
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Controls.Add(button2);
-            panel2.Controls.Add(button1);
-            panel2.Controls.Add(comboBox2);
-            panel2.Controls.Add(textBox1);
-            panel2.Controls.Add(label5);
+            panel2.Controls.Add(errorLabel);
+            panel2.Controls.Add(withdrawButton);
+            panel2.Controls.Add(depositButton);
+            panel2.Controls.Add(currency);
+            panel2.Controls.Add(amountTextBox);
+            panel2.Controls.Add(amountLabel);
             panel2.Font = new Font("Segoe UI", 12F);
             panel2.Location = new Point(12, 154);
             panel2.Name = "panel2";
             panel2.Size = new Size(698, 219);
             panel2.TabIndex = 7;
             // 
-            // button2
+            // errorLabel
             // 
-            button2.Location = new Point(190, 134);
-            button2.Name = "button2";
-            button2.Size = new Size(140, 42);
-            button2.TabIndex = 7;
-            button2.Text = "WITHDRAW";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            errorLabel.FlatStyle = FlatStyle.Flat;
+            errorLabel.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            errorLabel.ForeColor = Color.IndianRed;
+            errorLabel.Location = new Point(21, 177);
+            errorLabel.Name = "errorLabel";
+            errorLabel.Size = new Size(655, 28);
+            errorLabel.TabIndex = 8;
+            errorLabel.Text = "error";
+            errorLabel.TextAlign = ContentAlignment.MiddleCenter;
+            errorLabel.Visible = false;
             // 
-            // button1
+            // withdrawButton
             // 
-            button1.Location = new Point(385, 134);
-            button1.Name = "button1";
-            button1.Size = new Size(140, 42);
-            button1.TabIndex = 6;
-            button1.Text = "DEPOSIT";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            withdrawButton.Location = new Point(190, 118);
+            withdrawButton.Name = "withdrawButton";
+            withdrawButton.Size = new Size(140, 42);
+            withdrawButton.TabIndex = 7;
+            withdrawButton.Text = "WITHDRAW";
+            withdrawButton.UseVisualStyleBackColor = true;
+            withdrawButton.Click += withdrawButton_Click;
             // 
-            // comboBox2
+            // depositButton
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(514, 44);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(151, 36);
-            comboBox2.TabIndex = 5;
+            depositButton.Location = new Point(385, 118);
+            depositButton.Name = "depositButton";
+            depositButton.Size = new Size(140, 42);
+            depositButton.TabIndex = 6;
+            depositButton.Text = "DEPOSIT";
+            depositButton.UseVisualStyleBackColor = true;
+            depositButton.Click += depositButton_Click;
             // 
-            // textBox1
+            // currency
             // 
-            textBox1.Location = new Point(280, 44);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(228, 34);
-            textBox1.TabIndex = 4;
+            currency.DropDownStyle = ComboBoxStyle.DropDownList;
+            currency.FormattingEnabled = true;
+            currency.Location = new Point(514, 44);
+            currency.Name = "currency";
+            currency.Size = new Size(151, 36);
+            currency.TabIndex = 5;
             // 
-            // label5
+            // amountTextBox
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 12F);
-            label5.Location = new Point(134, 47);
-            label5.Name = "label5";
-            label5.Size = new Size(92, 28);
-            label5.TabIndex = 3;
-            label5.Text = "Amount: ";
-            label5.Click += label5_Click;
+            amountTextBox.Location = new Point(280, 44);
+            amountTextBox.Name = "amountTextBox";
+            amountTextBox.Size = new Size(228, 34);
+            amountTextBox.TabIndex = 4;
+            // 
+            // amountLabel
+            // 
+            amountLabel.AutoSize = true;
+            amountLabel.Font = new Font("Segoe UI", 12F);
+            amountLabel.Location = new Point(134, 47);
+            amountLabel.Name = "amountLabel";
+            amountLabel.Size = new Size(92, 28);
+            amountLabel.TabIndex = 3;
+            amountLabel.Text = "Amount: ";
             // 
             // Form1
             // 
@@ -175,13 +188,12 @@
             BackColor = SystemColors.Window;
             ClientSize = new Size(722, 396);
             Controls.Add(panel2);
-            Controls.Add(label2);
-            Controls.Add(comboBox1);
+            Controls.Add(accountLabel);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Form1";
             Text = "Simple Bank Interface";
-            Load += Form1_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -192,17 +204,18 @@
 
         #endregion
 
-        private Label label1;
-        private ComboBox comboBox1;
-        private Label label2;
-        private Label label4;
-        private Label label3;
+        private Label welcomeLabel;
+        private ComboBox accountActive;
+        private Label accountLabel;
+        private Label accountBalance;
+        private Label balanceLabel;
         private Panel panel1;
         private Panel panel2;
-        private Label label5;
-        private Button button1;
-        private ComboBox comboBox2;
-        private TextBox textBox1;
-        private Button button2;
-        }
+        private Label amountLabel;
+        private Button depositButton;
+        private ComboBox currency;
+        private TextBox amountTextBox;
+        private Button withdrawButton;
+        private Label errorLabel;
+    }
 }
